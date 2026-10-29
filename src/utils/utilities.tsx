@@ -50,6 +50,12 @@ export function validarRegistroPsw(psw: string, confirmPsw: string): boolean
     return true;
 }
 
+export function camposCompletos(user: Usuario): boolean {
+    const hayVacios = Object.values(user).some(valor => String(valor).trim() === '');
+    if(hayVacios) return false;
+    return true;
+}
+
 export function validarRegistro(registro: Usuario): boolean {
     if(!camposCompletos(registro)) {
         Alert.alert('Error', 'Completar todos los campos');
@@ -59,21 +65,15 @@ export function validarRegistro(registro: Usuario): boolean {
         Alert.alert('Error', 'El formato del email es incorrecto');
         return false;    
     }
-    if(!validarRegistroPsw(registro.password, registro.confirmPassword)) {
-        Alert.alert('Error', 'Las contraseñas deben coincidir');
-        return false;
-    }
     if(!verificarContraseña(registro.password)){ 
         Alert.alert('Error', 'La contraseña no cumple con los requisitos de seguridad');
         return false;
     }
+    if(!validarRegistroPsw(registro.password, registro.confirmPassword)) {
+        Alert.alert('Error', 'Las contraseñas deben coincidir');
+        return false;
+    }
+    
     Alert.alert("Credenciales aceptadas", "Bienvenido")
-    return true;
-}
-
-
-export function camposCompletos(user: Usuario): boolean {
-    const hayVacios = Object.values(user).some(valor => String(valor).trim() === '');
-    if(hayVacios) return false;
     return true;
 }

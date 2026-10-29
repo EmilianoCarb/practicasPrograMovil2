@@ -16,6 +16,7 @@ it('renders correctly', () => {
 
 
   expect(getByText('Iniciar Sesión')).toBeTruthy();
+  expect(getByText('Registro')).toBeTruthy();
   expect(getByPlaceholderText('Correo electronico')).toBeTruthy();
   expect(getByPlaceholderText('Ingresar contraseña')).toBeTruthy();
 })

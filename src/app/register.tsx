@@ -1,8 +1,7 @@
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { Usuario, validarRegistro } from "../utils/utilities";
-;
+import { useState } from 'react';;
+import { Usuario, validarRegistro }from "../utils/utilities";
 export default function Index(){
     const router = useRouter();
     const [usuario, setUsuario] = useState<Usuario>({
@@ -13,39 +12,37 @@ export default function Index(){
     });
     const onRegister = () => { 
         if(validarRegistro(usuario)){
-        router.push({
-            pathname: "./",
-        })};
+        router.push({ pathname: "/" })
+    };
     }
     return (
         <View style={styles.container}>
             <Text style={styles.label}>Correo electrónico</Text>
-            <TextInput value={usuario.email} 
-            placeholder="Correo electronico" 
+            <TextInput placeholder="Correo electronico"
+            value={usuario.email}  
             style={styles.input} 
             keyboardType="email-address" 
-            onChangeText={(nuevoTexto) => setUsuario({...usuario, email:nuevoTexto})}>
-            </TextInput>
+            onChangeText={(nuevoTexto) => setUsuario({...usuario, email:nuevoTexto})}/>
             <Text style={styles.label}>Nombre de Usuario</Text>
-            <TextInput value={usuario.nombre} 
-            placeholder="Nombre de Usuario" 
+            <TextInput placeholder="Nombre de Usuario"  
+            value={usuario.nombre} 
             style={styles.input} 
             onChangeText={(nuevoUsuario) => setUsuario({...usuario, nombre:nuevoUsuario})} 
-            keyboardType="email-address">
-            </TextInput>
+            keyboardType="email-address" />
             <Text style={styles.label}>Contraseña</Text>
-            <TextInput value={usuario.password}
-            placeholder="Ingresar contraseña" 
+            <TextInput placeholder="Ingresar contraseña" 
+            value={usuario.password}
             style={styles.input}
             secureTextEntry={true} 
-            onChangeText={(nuevoTexto) => setUsuario({...usuario, password: nuevoTexto})}>
-            </TextInput>
+            onChangeText={(nuevoTexto) => setUsuario({...usuario, password: nuevoTexto})}/>
             <Text style={styles.label}>Confirmar contraseña</Text>
-            <TextInput value={usuario.confirmPassword} placeholder="Confirmar contraseña" style={styles.input}
+            <TextInput placeholder="Confirmar contraseña"
+            value={usuario.confirmPassword} 
+            style={styles.input}
             secureTextEntry={true} 
-            onChangeText={(nuevoConfirmPsw) => setUsuario({...usuario, confirmPassword: nuevoConfirmPsw})}>
-            </TextInput>
-            <Button title='Registro' onPress={onRegister} />
+            onChangeText={(nuevoConfirmPsw) => setUsuario({...usuario, confirmPassword: nuevoConfirmPsw})}/>
+            <Button title='Registro' 
+            onPress={onRegister}/>
         </View>
     )
 }

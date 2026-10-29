@@ -1,7 +1,7 @@
-import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Alert, Button, Image, StyleSheet, Text, TextInput, View } from "react-native";
-import { validarDatos } from "../utils/utilities";
+import { Image, Alert, Button, StyleSheet, TextInput, View, Text } from "react-native";
+import { useRouter } from 'expo-router';
+import { validarDatos }from "../utils/utilities";
 export default function Index(){
     const router = useRouter();
     const [textoPsw, setTextoPsw] = useState<string>('');
@@ -38,12 +38,14 @@ export default function Index(){
             style={styles.input}
             secureTextEntry={true} 
             onChangeText={(nuevoTexto) => setTextoPsw(nuevoTexto)}/>
+            <View style={styles.actions}>
             <Button 
             title="Iniciar Sesión" 
             onPress={ () => onPressButton(textoEmail, textoPsw)}/>
             <Button 
             title='Registro'  
             onPress={onRegister}/>
+            </View>
         </View>
     )
 }
@@ -71,6 +73,11 @@ const styles = StyleSheet.create({
     marginTop: 10,           
     marginBottom: 4,         
   },
+  actions: {
+    width: '80%',
+    gap: 16,
+    marginTop: 12,
+  },    
   image: {
     width: 500,
     height: 200,
