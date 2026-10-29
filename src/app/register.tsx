@@ -12,8 +12,8 @@ export default function Index(){
     });
     const onRegister = () => { 
         if(validarRegistro(usuario)){
-        router.push({ pathname: "/" })
-    };
+        router.push({pathname: '/'});
+    }
     }
     return (
         <View style={styles.container}>

@@ -5,6 +5,13 @@ import Register from '../register';
 // Mock Alert
 jest.spyOn(Alert, 'alert');
 
+const mockPush = jest.fn();
+jest.mock('expo-router', () => ({
+  useRouter: () => ({
+    push: mockPush,
+  }),
+}));
+
 describe('Register (Register Screen)', () => {
 beforeEach(() => {
   jest.clearAllMocks();
@@ -52,7 +59,7 @@ it('shows alert when only email is empty', async () => {
 it('shows alert when only username is empty', async () => {
     const { getByPlaceholderText, getByText } = render(<Register />);
     const emailInput = getByPlaceholderText('Correo electronico');
-    const passwordInput = getByPlaceholderText('Confirmar contraseña');
+    const passwordInput = getByPlaceholderText('Ingresar contraseña');
     const confirmPasswordInput = getByPlaceholderText('Confirmar contraseña');
     const registerButton = getByText('Registro');
 
@@ -85,7 +92,7 @@ it('shows alert when only password is empty', async () => {
 it('shows alert when only confirm password is empty', async () => {
     const { getByPlaceholderText, getByText } = render(<Register />);
     const emailInput = getByPlaceholderText('Correo electronico');
-    const passwordInput = getByPlaceholderText('Confirmar contraseña');
+    const passwordInput = getByPlaceholderText('Ingresar contraseña');
     const registerButton = getByText('Registro');
     const nombreUsuario = getByPlaceholderText("Nombre de Usuario");
 
@@ -101,7 +108,7 @@ it('shows alert when only confirm password is empty', async () => {
 it('has secure text entry for password fields', () => {
     const {getByPlaceholderText } = render(<Register />);
     const passwordInput = getByPlaceholderText('Ingresar contraseña');
-    const confirmPasswordInput = getByPlaceholderText('Ingresar contraseña');
+    const confirmPasswordInput = getByPlaceholderText('Confirmar contraseña');
 
     expect(confirmPasswordInput.props.secureTextEntry).toBe(true);
     expect(passwordInput.props.secureTextEntry).toBe(true);
@@ -110,7 +117,7 @@ it('has secure text entry for password fields', () => {
 it('has correct keyboard type for email field', () => {
     const { getByPlaceholderText } = render(<Register />);
     const emailInput = getByPlaceholderText('Correo electronico');
-
+    
     expect(emailInput.props.keyboardType).toBe('email-address');
 });
 
@@ -182,6 +189,24 @@ describe('Password validation', () => {
     fireEvent.press(registerButton);
     await waitFor(() => {
     expect(Alert.alert).toHaveBeenCalledWith('Credenciales aceptadas', 'Bienvenido');
+  });
+ });
+
+ it('Not the same password', async () => {
+    const{ getByPlaceholderText, getByText } = render(<Register />);
+    const emailInput = getByPlaceholderText('Correo electronico');
+    const nombreUsuario = getByPlaceholderText("Nombre de Usuario");
+    const passwordInput = getByPlaceholderText('Ingresar contraseña');
+    const confirmPassword = getByPlaceholderText('Confirmar contraseña');
+    const registerButton = getByText('Registro');
+
+    fireEvent.changeText(emailInput, 'correo@valido.mx');
+    fireEvent.changeText(nombreUsuario, "Usuario");
+    fireEvent.changeText(passwordInput, 'Valida123!');
+    fireEvent.changeText(confirmPassword, 'Valida1234!');
+    fireEvent.press(registerButton);
+    await waitFor(() => {
+    expect(Alert.alert).toHaveBeenCalledWith('Error', 'Las contraseñas deben coincidir');
   });
  });
 
@@ -281,3 +306,26 @@ it('rejects passwords without uppercase', async() => {
  });
 })
 
+describe('Index after data validation', () => {
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
+    it("has all parameters right", async() => {
+        const{ getByPlaceholderText, getByText } = render(<Register />);
+        const emailInput = getByPlaceholderText('Correo electronico');
+        const nombreUsuario = getByPlaceholderText("Nombre de Usuario");
+        const passwordInput = getByPlaceholderText('Ingresar contraseña');
+        const confirmPassword = getByPlaceholderText('Confirmar contraseña');
+        const registerButton = getByText('Registro');
+
+        fireEvent.changeText(emailInput, 'correo@valido.mx');
+        fireEvent.changeText(nombreUsuario, "Usuario");
+        fireEvent.changeText(passwordInput, 'Valida123!');
+        fireEvent.changeText(confirmPassword, 'Valida123!');
+        fireEvent.press(registerButton);
+        await waitFor(() => {
+            expect(mockPush).toHaveBeenCalledWith({pathname: '/'});
+        })
+})
+});
