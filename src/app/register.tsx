@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { useState } from 'react';;
+import { useState } from 'react';
 import { Usuario, validarRegistro }from "../utils/utilities";
 export default function Index(){
     const router = useRouter();
