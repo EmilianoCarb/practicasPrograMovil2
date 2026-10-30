@@ -38,12 +38,12 @@ export default function Index(){
             secureTextEntry={true} 
             onChangeText={(nuevoTexto) => setTextoPsw(nuevoTexto)}/>
             <View style={styles.actions}>
-            <Button 
-            title="Iniciar Sesión" 
-            onPress={ () => onPressButton(textoEmail, textoPsw)}/>
-            <Button 
-            title='Registro'  
-            onPress={onRegister}/>
+                <Button 
+                title="Iniciar Sesión" 
+                onPress={ () => onPressButton(textoEmail, textoPsw)}/>
+                <Button
+                title='Registro'  
+                onPress={onRegister}/>
             </View>
         </View>
     )
