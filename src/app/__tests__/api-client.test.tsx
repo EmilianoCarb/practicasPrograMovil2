@@ -18,7 +18,7 @@ global.fetch = jest.fn(() =>
 ) as jest.Mock;
 
 describe('api-client', () => {
-  it('debería hacer fetch y mapear correctamente los datos de los artistas', async () => {
+  it('fetch y mapear correctamente los datos de los artistas', async () => {
     const artists = await getMusicData();
 
     expect(artists).toHaveLength(1);

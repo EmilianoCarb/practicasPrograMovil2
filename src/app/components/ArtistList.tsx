@@ -1,7 +1,7 @@
 import React from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
 import ArtistBox from "./ArtistBox";
-import { Artist } from "../types/artist"
+import { Artist } from "@/types/artist"
 import { useRouter } from "expo-router";
 
 export default function ArtistList({ artists }: { artists: Artist[] }) {
