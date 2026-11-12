@@ -1,4 +1,4 @@
-import { Artist } from "../types/artist";
+import { Artist } from "@/types/artist";
 import React from "react";
 import { StyleSheet, Text, View , Image} from 'react-native';
 

@@ -10,8 +10,9 @@ export default function Index(){
         if(validarDatos(email, psw))
         {
             Alert.alert("Login exitoso", "Credenciales aceptadas, bienvenido");
-            setTextoEmail('');
-            setTextoPsw('');
+            router.push({
+            pathname: "/home",
+        });
         }
     }
      const onRegister = () => { 

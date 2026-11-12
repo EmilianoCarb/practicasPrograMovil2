@@ -3,10 +3,10 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["./src/app/*"],
       "@/assets/*": ["./assets/*"]
     },
-        "types": ["jest"]
+        "types": ["jest", "node"]
 
   },
   "include": [

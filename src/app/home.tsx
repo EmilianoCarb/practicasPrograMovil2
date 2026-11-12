@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View,StyleSheet } from "react-native";
 import {getMusicData} from './api-client'
 import ArtistList from './components/ArtistList';
-import { Artist } from "./types/artist";
+import { Artist } from "@/types/artist";
 
 export default function Home() {
   const [artists, setArtists] = useState<Artist[]>([]);
@@ -12,7 +12,7 @@ export default function Home() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View  style={styles.container}>
       {artists && <ArtistList artists={artists} />}
     </View>
   );
